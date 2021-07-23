@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -7,6 +10,7 @@
     <title>Lokkisalle - société proposant la location de salles de réunion à ses clients</title>
     <link rel="stylesheet" href="<?php echo RACINE_SITE; ?>inc/css/style/style.css">
     <link rel="stylesheet" href="<?php echo RACINE_SITE; ?>inc/css/bootstrap/bootstrap.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     
     </head>
     <body>    

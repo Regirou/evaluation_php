@@ -27,9 +27,11 @@ if(!empty($_POST)){
     if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
             $pdo->exec("UPDATE commande SET id_membre='$_POST[id_membre]', id_produit='$_POST[id_produit]', date_enregistrement='$_POST[date_enregistrement]' WHERE id_commande='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_commande.php?choix=afficher');
+            ob_end_flush();
     }else{
         $pdo->exec("INSERT INTO commande(id_membre, id_produit, date_enregistrement) VALUES ('$_POST[id_membre]', '$_POST[id_produit]', '$_POST[date_enregistrement]')");
         header('Location:'.RACINE_SITE.'admin/gestion_commande.php?choix=afficher');
+        ob_end_flush();
     }
 }
 
@@ -109,6 +111,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
 if(isset($_GET['choix']) AND $_GET['choix']=='supprimer'){
     $pdo->query("DELETE FROM commande WHERE id_commande='$_GET[id]'");
     header('Location:'.RACINE_SITE.'admin/gestion_commande.php?choix=afficher');
+    ob_end_flush();
 }
 ?>
 <?php

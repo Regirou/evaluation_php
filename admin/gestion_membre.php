@@ -23,9 +23,11 @@ if(!empty($_POST)){
     if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
             $pdo->exec("UPDATE membre SET pseudo='$_POST[pseudo]', mdp='$_POST[mdp]',nom='$_POST[nom]',prenom='$_POST[prenom]',email='$_POST[email]',civilite='$_POST[civilite]',date_enregistrement='$_POST[date_enregistrement]',status='$_POST[status]' WHERE id_membre='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_membre.php?choix=afficher');
+            ob_end_flush();
     }else{
         $pdo->exec("INSERT INTO membre(pseudo, mdp, nom, prenom, email, civilite, date_enregistrement, status) VALUES ('$_POST[pseudo]','$_POST[mdp]','$_POST[nom]','$_POST[prenom]','$_POST[email]','$_POST[civilite]', '$_POST[date_enregistrement]','$_POST[status]')");
         header('Location:'.RACINE_SITE.'admin/gestion_membre.php?choix=afficher');
+        ob_end_flush();
     }
 }
 
@@ -65,7 +67,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 
         <div class="form-group">
         <label for="civilite">Civilité</label><br>
-        <select class="form-control" name="civilite">
+        <select style="color:grey" class="form-control" name="civilite">
             <option value="Mme">Mme</option>
             <option value="Mlle">Mlle</option>
             <option value="Mr">Mr</option>
@@ -74,7 +76,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 
         <div class="form-group">
         <label for="date_enregistrement">Date d'enregistrement</label><br>
-        <input class="form-control" type="date" id="date_enregistrement" name="date_enregistrement"><br><br>
+        <input style="color:grey" class="form-control" type="date" id="date_enregistrement" name="date_enregistrement"><br><br>
         </div>
 
         <div class="form-group">
@@ -126,6 +128,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
 if(isset($_GET['choix']) AND $_GET['choix']=='supprimer'){
     $pdo->query("DELETE FROM membre WHERE id_membre='$_GET[id]'");
     header('Location:'.RACINE_SITE.'admin/gestion_membre.php?choix=afficher');
+    ob_end_flush();
 }
 ?>
 <?php
@@ -146,7 +149,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
 
         <div class="form-group">
         <label for="mdp">Mot de passe</label><br>
-        <input class="form-control" type="password" name="mdp" id="mdp" placeholder="le mot de passe du membre"/><br><br>
+        <input class="form-control" type="password" name="mdp" id="mdp" placeholder="le mot de passe du membre" value="<?php if(isset($membre_actuel['mdp'])) echo $membre_actuel['mdp']; ?>"/><br><br>
         </div>
 
         <div class="form-group">

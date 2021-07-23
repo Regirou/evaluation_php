@@ -10,7 +10,8 @@ if(isset($_GET['state']) AND $_GET['state']=='reload'){
     $_SESSION['membre']['prenom']= $membre_actuel['prenom'];
     $_SESSION['membre']['nom']= $membre_actuel['nom'];
 
-        Header('Location:'.RACINE_SITE.'profil.php');   
+        Header('Location:'.RACINE_SITE.'profil.php'); 
+        ob_end_flush();  
 ?>
 
 <?php
@@ -75,9 +76,10 @@ if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
 
 if(!empty($_POST)){
     if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
-        $pdo->exec("UPDATE membre SET pseudo='$_POST[pseudo]', nom='$_POST[nom]',prenom='$_POST[prenom]',email='$_POST[email]',civilite='$_POST[civilite]' WHERE pseudo='$pseudo'");
+        $pdo->exec("UPDATE membre SET nom='$_POST[nom]',prenom='$_POST[prenom]',email='$_POST[email]',civilite='$_POST[civilite]' WHERE pseudo='$pseudo'");
     }
     Header('Location:'.RACINE_SITE.'profil.php?state=reload');
+    ob_end_flush();
 }
 ?>
 

@@ -35,13 +35,16 @@ if(!empty($_POST)){
         if(!isset($_GET['id']) AND empty($_FILES['photo']['name'])){
             $pdo->exec("UPDATE salle SET titre='$_POST[titre]', description='$_POST[description]',pays='$_POST[pays]',ville='$_POST[ville]',adresse='$_POST[adresse]',cp='$_POST[cp]',capacite='$_POST[capacite]',categorie='$_POST[categorie]' WHERE id_salle='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_salle.php?choix=afficher'); 
+            ob_end_flush();
         }else{
             $pdo->exec("UPDATE salle SET titre='$_POST[titre]', description='$_POST[description]',pays='$_POST[pays]',ville='$_POST[ville]',adresse='$_POST[adresse]',cp='$_POST[cp]',capacite='$_POST[capacite]',categorie='$_POST[categorie]' WHERE id_salle='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_salle.php?choix=afficher');
+            ob_end_flush();
         }
     }else{
         $pdo->exec("INSERT INTO salle (titre, description, photo, pays, ville, adresse, cp, capacite, categorie) VALUES ('$_POST[titre]','$_POST[description]','$photo_bdd','$_POST[pays]','$_POST[ville]','$_POST[adresse]', '$_POST[cp]', '$_POST[capacite]','$_POST[categorie]')");
         header('Location:'.RACINE_SITE.'admin/gestion_salle.php?choix=afficher'); 
+        ob_end_flush();
     }
 }
 

@@ -85,6 +85,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='supprimer' ){
     }
 
     header('Location:'.RACINE_SITE.'panier.php');
+    ob_end_flush();
 }
 
 ?>

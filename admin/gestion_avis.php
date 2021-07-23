@@ -27,9 +27,11 @@ if(!empty($_POST)){
     if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
             $pdo->exec("UPDATE avis SET id_membre='$_POST[id_membre]', id_salle='$_POST[id_salle]', commentaire='$_POST[commentaire]', note='$_POST[note]', date_enregistrement='$_POST[date_enregistrement]' WHERE id_avis='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_avis.php?choix=afficher');
+            ob_end_flush();
     }else{
         $pdo->exec("INSERT INTO avis(id_membre, id_salle, commentaire, note, date_enregistrement) VALUES ('$_POST[id_membre]','$_POST[id_salle]','$_POST[commentaire]', '$_POST[note]','$_POST[date_enregistrement]')");
         header('Location:'.RACINE_SITE.'admin/gestion_avis.php?choix=afficher');
+        ob_end_flush();
     }
 }
 
@@ -136,6 +138,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
 if(isset($_GET['choix']) AND $_GET['choix']=='supprimer'){
     $pdo->query("DELETE FROM avis WHERE id_avis='$_GET[id]'");
     header('Location:'.RACINE_SITE.'admin/gestion_avis.php?choix=afficher');
+    ob_end_flush();
 }
 ?>
 <?php
@@ -187,11 +190,11 @@ if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
         <div class="form-group">
         <label for="note">Note</label><br>
         <select class="form-control" class="form-control" name="note">
-            <option <?php if(isset($avis_actuel['civilite']) AND $avis_actuel['note']=='1') echo 'selected'; ?>>1</option>
-            <option <?php if(isset($avis_actuel['civilite']) AND $avis_actuel['note']=='2') echo 'selected'; ?>>2</option>
-            <option <?php if(isset($avis_actuel['civilite']) AND $avis_actuel['note']=='3') echo 'selected'; ?>>3</option>
-            <option <?php if(isset($avis_actuel['civilite']) AND $avis_actuel['note']=='4') echo 'selected'; ?>>4</option>
-            <option <?php if(isset($avis_actuel['civilite']) AND $avis_actuel['note']=='5') echo 'selected'; ?>>5</option>
+            <option <?php if(isset($avis_actuel['note']) AND $avis_actuel['note']=='1') echo 'selected'; ?>>1</option>
+            <option <?php if(isset($avis_actuel['note']) AND $avis_actuel['note']=='2') echo 'selected'; ?>>2</option>
+            <option <?php if(isset($avis_actuel['note']) AND $avis_actuel['note']=='3') echo 'selected'; ?>>3</option>
+            <option <?php if(isset($avis_actuel['note']) AND $avis_actuel['note']=='4') echo 'selected'; ?>>4</option>
+            <option <?php if(isset($avis_actuel['note']) AND $avis_actuel['note']=='5') echo 'selected'; ?>>5</option>
         </select><br><br>
         </div>
 

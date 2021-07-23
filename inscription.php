@@ -3,8 +3,8 @@
 <?php
 
 if(!empty($_POST)){
-
-    if (strlen($_POST['pseudo'])<6||strlen($_POST['pseudo']>20)){
+    $verif_caracteres=preg_match('#^[a-zA-Z0-9._-]+$#',$_POST['pseudo']);
+    if (!$verif_caracteresstrlen||($_POST['pseudo'])<6||strlen($_POST['pseudo']>20)){
         echo "<div class='alert alert-warning text-center' role='alert'> Votre pseudo trop court ou trop long</div>";
     }else{
         $membre = $pdo->query("SELECT * FROM membre WHERE pseudo = '$_POST[pseudo]'");

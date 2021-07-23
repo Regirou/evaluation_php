@@ -31,9 +31,11 @@ if(!empty($_POST)){
         // echo '<pre>';
             $pdo->exec("UPDATE produit SET date_arrivee='$_POST[date_arrivee]', heure_arrivee='$_POST[heure_arrivee]', date_depart='$_POST[date_depart]', heure_depart='$_POST[heure_depart]',id_salle='$_POST[id_salle]',prix='$_POST[prix]', etat='$_POST[etat]' WHERE id_produit='$_GET[id]'");
             header('Location:'.RACINE_SITE.'admin/gestion_produit.php?choix=afficher');
+            ob_end_flush();
     }else{
         $pdo->exec("INSERT INTO produit(date_arrivee, heure_arrivee, date_depart, heure_depart, id_salle, prix, etat) VALUES ('$_POST[date_arrivee]', '$_POST[heure_arrivee]', '$_POST[date_depart]', '$_POST[heure_depart]', '$_POST[id_salle]', '$_POST[prix]', '$_POST[etat]')");
         header('Location:'.RACINE_SITE.'admin/gestion_produit.php?choix=afficher');
+        ob_end_flush();
     }
 }
 
@@ -53,7 +55,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 
         <div class="form-group">
         <label for="heure_arrivee">Heure d'arrivée</label><br>
-        <input class="form-control" type="time" id="heure_arrivee" name="heure_arrivee" placeholder="Heure d'arrivée" style="color:grey"/> <br><br>
+        <input min="09:00" max="20:00" required class="form-control" type="time" id="heure_arrivee" name="heure_arrivee" placeholder="Heure d'arrivée" style="color:grey"/> <br><br>
         </div>
 
         <div class="form-group">
@@ -63,7 +65,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 
         <div class="form-group">
         <label for="heure_depart">Heure de depart</label><br>
-        <input class="form-control" type="time" name="heure_depart" id="heure_depart" placeholder="Heure de depart" style="color:grey"/><br><br>
+        <input min="09:00" max="20:00" required class="form-control" type="time" name="heure_depart" id="heure_depart" placeholder="Heure de depart" style="color:grey"/><br><br>
         </div>
 
         <div class="form-group">
@@ -120,9 +122,11 @@ if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
         echo "<tr class='align-middle'>
             <td>$produits[id_produit]</td>
             <td>$produits[date_arrivee]</td>
-            <td>$produits[heure_arrivee]</td>
+            <td>"; echo date('H:i',strtotime($produits['heure_arrivee']));
+            echo "</td>
             <td>$produits[date_depart]</td>
-            <td>$produits[heure_depart]</td>";
+            <td>"; echo date('H:i',strtotime($produits['heure_depart']));
+            echo "</td>";
             $res=$pdo->query("SELECT * FROM salle");
             while($salle=$res->fetch(PDO::FETCH_ASSOC)){
                 if($salle['id_salle'] == $produits['id_salle'])
@@ -166,7 +170,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
 
         <div class="form-group">
         <label for="heure_arrivee">Heure d'arrivée</label><br>
-        <input class="form-control" type="time" id="heure_arrivee" name="heure_arrivee" placeholder="Heure d'arrivée" value="<?php if(isset($produit_actuel['heure_arrivee'])) echo $produit_actuel['heure_arrivee']; ?>"/> <br><br>
+        <input min="09:00" max="20:00" required class="form-control" type="time" id="heure_arrivee" name="heure_arrivee" placeholder="Heure d'arrivée" value="<?php if(isset($produit_actuel['heure_arrivee'])) echo $produit_actuel['heure_arrivee']; ?>"/> <br><br>
         </div>
 
         <div class="form-group">
@@ -176,7 +180,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='modifier'){
 
         <div class="form-group">
         <label for="heure_depart">Heure de depart</label><br>
-        <input class="form-control" type="time" name="heure_depart" id="heure_depart" placeholder="Heure de depart" value="<?php if(isset($produit_actuel['heure_depart'])) echo $produit_actuel['heure_depart']; ?>"/><br><br>
+        <input min="09:00" max="20:00" required class="form-control" type="time" name="heure_depart" id="heure_depart" placeholder="Heure de depart" value="<?php if(isset($produit_actuel['heure_depart'])) echo $produit_actuel['heure_depart']; ?>"/><br><br>
         </div>
 
         <div class="form-group">
