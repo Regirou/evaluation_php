@@ -54,6 +54,14 @@ function ajouterProduitDansPanier($id_produit, $titre, $photo, $categorie, $capa
     }
 }
 
+function montantTotal(){
+    $total = 0;
+   for ($i=0; $i < count($_SESSION['panier']['id_produit']) ; $i++) { 
+       $total += $_SESSION['panier']['prix'][$i];
+   }
+   return round($total, 2);
+}
+
 function internauteEstConnecte(){
     if(isset($_SESSION['membre'])){
         return true;

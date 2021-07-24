@@ -103,7 +103,7 @@ if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
     INNER JOIN salle ON avis.id_salle=salle.id_salle
     INNER JOIN membre ON avis.id_membre=membre.id_membre");
 ?>
-<div style='height:800px' class='text-center p-5'>
+<div style='height:800px' class='text-center p-5 table-responsive'>
 <table class="table table-striped">
 <tr class="align-middle">
     <th>ID de l'avis</th>

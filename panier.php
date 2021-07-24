@@ -13,7 +13,7 @@ if(!empty($_POST['ajout_panier'])){
     ajouterProduitDansPanier($produit['id_produit'],$produit['titre'],$produit['photo'], $produit['categorie'], $produit['capacite'], $produit['adresse'], $produit['cp'],$produit['ville'],$produit['date_arrivee'], $produit['heure_arrivee'], $produit['date_depart'], $produit['heure_depart'], $produit['prix']);
 }
 ?>
-<div style='height:850px' class='text-center p-5'>
+<div style='height:850px' class='text-center p-5 table-responsive'>
 <table class='table pt-5 table-striped'>
 <tr class='align-middle'>
 <th>Titre</th>
@@ -35,7 +35,6 @@ if(!empty($_POST['ajout_panier'])){
 if(empty($_SESSION['panier']['id_produit'])){
     echo "<tr class='align-middle'><td colspan='14'>Votre panier est vide</td></tr>";
 }else{
-    // echo "<tr><td colspan='12'>Votre panier contient des produits</td></tr>";
     for($i=0; $i<count($_SESSION['panier']['id_produit']); $i++){
         echo "<tr class='align-middle'>";
         echo "<td>".$_SESSION['panier']['titre'][$i]."</td>";
@@ -46,15 +45,18 @@ if(empty($_SESSION['panier']['id_produit'])){
         echo "<td>".$_SESSION['panier']['cp'][$i]."</td>";
         echo "<td>".$_SESSION['panier']['ville'][$i]."</td>";
         echo "<td>".$_SESSION['panier']['date_arrivee'][$i]."</td>";
-        echo "<td>".$_SESSION['panier']['heure_arrivee'][$i]."</td>";
+        echo "<td>"; echo date('H:i',strtotime($_SESSION['panier']['heure_arrivee'][$i]));
+        echo "</td>";
         echo "<td>".$_SESSION['panier']['date_depart'][$i]."</td>";
-        echo "<td>".$_SESSION['panier']['heure_depart'][$i]."</td>";
+        echo "<td>"; echo date('H:i',strtotime($_SESSION['panier']['heure_depart'][$i]));
+        echo "</td>";
         echo "<td>".$_SESSION['panier']['prix'][$i]."€</td>";
         $idProduit=$_SESSION['panier']['id_produit'][$i];
         echo "<td><a href='?choix=supprimer&id=$idProduit'><img src='inc/img/trash.png' height=25></a></td>";
         echo "</tr>";
     }
 }
+echo "<tr><th colspan='7' class='py-4 align-middle'>Total</th><td class='align-middle' colspan='7'>" . montantTotal() . " €</td></tr>";
 echo "<tr my-5><td colspan='14'><a class='btn btn-primary' href='reservation.php'>Réglement par carte</a></td></tr>
 </table>
 </div>";
