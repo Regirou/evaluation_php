@@ -5,7 +5,7 @@
 if(empty($_POST) AND !isset($_GET['choix'])){
 ?>
 <div style="height: 800px">
-    <p class="text-center pt-5"><img src="<?php echo RACINE_SITE; ?>inc/img/Cosy.jpeg" alt="" class="width25"></p>
+    <p class="text-center pt-5 mt-5"><img src="<?php echo RACINE_SITE; ?>inc/img/Cosy.jpeg" alt="" class="width25"></p>
     <p class="fs-4 pt-4 text-center">Cliquez sur les boutons pour ajouter une salle ou afficher des salles</p>
     <div class="d-flex my-5 justify-content-around">
         <a class='btn btn-primary' href="?choix=ajouter">Ajouter une salle</a>
