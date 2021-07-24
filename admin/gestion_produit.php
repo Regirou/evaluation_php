@@ -103,8 +103,8 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
     $resultat = $pdo->query("SELECT * FROM produit");
 ?>
-    <div class='h-100 text-center p-5'>
-        <table class="table table-striped table-responsive">
+    <div class='h-100 text-center p-5  table-responsive'>
+        <table class="table table-striped">
             <tr class="align-middle">
                 <th>ID du produit</th>
                 <th>Date d'arrivée</th>

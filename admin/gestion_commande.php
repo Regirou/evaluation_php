@@ -81,8 +81,8 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
     $resultat3 = $pdo->query("SELECT * FROM commande");
     ?>
-    <div style='height:800px' class='text-center p-5'>
-        <table class="table table-striped table-responsive">
+    <div style='height:800px' class='text-center p-5  table-responsive'>
+        <table class="table table-striped">
             <tr class="align-middle">
                 <th>ID de la commande</th>
                 <th>ID du membre</th>

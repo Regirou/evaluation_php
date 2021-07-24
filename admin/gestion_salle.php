@@ -116,8 +116,8 @@ if(isset($_GET['choix']) AND $_GET['choix']=='ajouter'){
 if(isset($_GET['choix']) AND $_GET['choix']=='afficher'){
     $resultat = $pdo->query("SELECT * FROM salle");
     ?>
-    <div class='text-center p-5'>
-    <table class="table table-striped table-responsive">
+    <div class='text-center p-5  table-responsive'>
+    <table class="table table-striped">
     <tr class="align-middle">
     <th>ID de la salle</th>
     <th>Titre</th>
